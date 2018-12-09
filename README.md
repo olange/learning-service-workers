@@ -34,3 +34,7 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 ### Service Worker Toolchain
 
 * [Google Developer › Workbox](https://developers.google.com/web/tools/workbox/) _A library for adding offline support to web apps; bakes in a set of best practices and removes the boilerplate every developer writes when working with service workers_
+
+## Additional resources
+
+* [Awesome Service Workers](https://github.com/TalAter/awesome-service-workers) _A curated collection of service worker resources, by the author of the O'Reilly book « Building Progressive Web Apps - O'Reilly »_
