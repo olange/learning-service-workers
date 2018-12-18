@@ -35,6 +35,10 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 * [MDN › WindowOrWorkerGlobalScope › fetch() method](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) _Returns a promise, that resolves to the resource contents; or rejects with a `TypeError`, when a network error is encountered (although this usually means a permissions issue or similar); an accurate check for a successful `fetch()` would include checking that the promise resolved, then checking that the `Response.ok` property has a value of `true`; note: an HTTP status of 404 does not constitute a network error._
 * [Fetch Living Standard](https://fetch.spec.whatwg.org/) _Provides a unified architecture for the numerous APIs that provide the ability to fetch a resource (e.g. HTML’s `<img>` and `<script>` elements, CSS' `cursor` and `list-style-image`, the `navigator.sendBeacon()` and `self.importScripts()` JavaScript APIs), so they are all consistent when it comes to various aspects of fetching, such as redirects and the CORS protocol; also defines the `fetch()` JavaScript API, which exposes most of the networking functionality at a fairly low level of abstraction._
 
+### Streams and Transforms
+
+* [Learning Streams and Observables](https://github.com/olange/learning-streams) _Learning using Streams, Observables and Transforms with JavaScript – articles, useful resources, personal notes._
+
 ### Service Worker Toolchain
 
 * [Google Developer › Workbox](https://developers.google.com/web/tools/workbox/) _A library for adding offline support to web apps; bakes in a set of best practices and removes the boilerplate every developer writes when working with service workers_
