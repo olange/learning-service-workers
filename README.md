@@ -8,7 +8,7 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 
 * Dedicated workers _are utilized by a single script; whereas_
 * Shared workers _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
-* Service Workers _are specialized Workers, that essentially act as proxy servers that sit between web applications, the browser, and the network (when available). They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests and take appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to push notifications and background sync APIs._
+* Service Workers _are specialized Workers, that essentially act as proxy servers that sit between web applications, the browser, and the network (when available). They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests and take appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to push notifications and background sync APIs._ »
 
 ## Articles: first principles
 
