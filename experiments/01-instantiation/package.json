@@ -4,12 +4,15 @@
   "description": "Instiation of a simple Web Worker classic script",
   "author": "Olivier Lange",
   "license": "BSD-3-Clause",
-  "keywords": [ "worker", "javascript" ],
+  "keywords": [
+    "worker",
+    "javascript"
+  ],
   "main": "index.html",
   "scripts": {
-    "start": "http-server -S -C config/cert.pem -K config/key.pem -a localhost -p 8443 -o",
+    "start": "http-server -S -C cert.pem -K key.pem -a localhost -p 8443 -o",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout config/key.pem -out config/cert.pem -subj \"/O=Le Petit Atelier de Genie logiciel/CN=localhost\""
+    "postinstall": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem -subj \"/O=Le Petit Atelier de Genie logiciel/CN=localhost\""
   },
   "devDependencies": {
     "http-server": "0.11.1"
