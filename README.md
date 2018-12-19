@@ -1,27 +1,27 @@
-# Learning Service Workers
+# Learning Fetch, Web- and Service Workers
 
 Learning using Service Workers, Web Workers and App Cache – articles, useful resources, courseware, personal notes
 
 [![Join the chat at https://gitter.im/learning-service-workers/Lobby](https://badges.gitter.im/learning-service-workers/Lobby.svg)](https://gitter.im/learning-service-workers/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-« _A_ Web Worker _is an object created using a constructor [Worker()](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker), that runs a JavaScript file containing the code that will run in the worker thread. There are different kind of Workers_ (excerpts from [Web Workers Concepts and Usage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API#Web_Workers_concepts_and_usage)):
+« _A_ **Web Worker** _runs the code of a Javascript file in a_ **worker thread**. _The Web Worker is an object, created using a constructor [Worker()](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker). There are different kind of Workers_ (excerpts from [Web Workers Concepts and Usage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API#Web_Workers_concepts_and_usage) and [Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers/)):
 
-* Dedicated workers _are utilized by a single script; whereas_
-* Shared workers _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
-* Service Workers _are specialized Workers, that essentially act as proxy servers that sit between web applications, the browser, and the network (when available). They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests and take appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to push notifications and background sync APIs._ »
+* **Dedicated workers** _are utilized by a single script; whereas_
+* **Shared workers** _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
+* **Service worker** _is a programmable network proxy, that sit between web applications, the browser, and the network (when available), allowing you to control how network requests from your page are handled. Among other things, they enable the creation of effective offline experiences. They will also allow access to push notifications, background sync and geofencing APIs._ »
 
 ## Articles: first principles
+
+### Web Workers
+
+* [The Basics of Web Workers](https://www.html5rocks.com/en/tutorials/workers/basics/) HTML5Rocks, Eric Bidelman, 26.07.2010 _describes_ [Dedicated Workers](https://html.spec.whatwg.org/multipage/workers.html#dedicated-workers-and-the-worker-interface) _from the_ [Web Workers specification](https://html.spec.whatwg.org/multipage/workers.html)_, that are refered to as_ Web Workers; see [#2](../../issues/2) for reading notes
+* [MDN › Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) _describes_ Dedicated- _and_ Shared workers. _A Dedicated Worker is only accessible from the script that first spawned it, whereas Shared Workers can be accessed from multiple scripts._
 
 ### Service Workers
 
 * [Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers/) Web Fundamentals, Matt Gaunt, 21.09.2018
 * [Service Workers explained](https://github.com/w3c/ServiceWorker/blob/master/explainer.md) [Alex Russel](https://github.com/slightlyoff), initial publ. 22.04.2013 / ongoing updates until 11.2017
 * [W3C › Service Workers Specification](https://github.com/w3c/ServiceWorker) by Alex Russel, Jake Archibald, Jungkee Song and many others
-
-### Web Workers
-
-* [MDN › Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) _describes_ Dedicated- _and_ Shared workers. _A Dedicated Worker is only accessible from the script that first spawned it, whereas Shared Workers can be accessed from multiple scripts._
-* [The Basics of Web Workers](https://www.html5rocks.com/en/tutorials/workers/basics/) HTML5Rocks, Eric Bidelman, 26.07.2010 _describes_ [Dedicated Workers](https://html.spec.whatwg.org/multipage/workers.html#dedicated-workers-and-the-worker-interface) _from the_ [Web Workers specification](https://html.spec.whatwg.org/multipage/workers.html)_, that are refered to as_ Web Workers; see [#2](../../issues/2) for reading notes
 
 ### Application Cache
 
