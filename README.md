@@ -21,7 +21,7 @@ See [#2](../../issues/2) for reading notes.
 * [MDN › Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) _describes Dedicated-, Shared- and Service workers, as well as Chrome- and Audio Workers_
 * [GWF › Updates › Workers ♥ ArrayBuffer](https://developers.google.com/web/updates/2011/09/Workers-ArrayBuffer) Eric Bidelman, 08.2011  
   _Typed arrays I/O and [Structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm); no more base64 encoding the data!_
-* [GWF › Updates › Transferable Objects: Lightning Fast!](https://developers.google.com/web/updates/2011/12/Transferable-Objects-Lightning-Fast) Eric Bidelman, 12.2011 _Demonstrates the huge performance improvement for message passing, that can be achieved with [Transferable Objects](https://developer.mozilla.org/en-US/docs/Web/API/Transferable)._
+* [GWF › Updates › Transferable Objects: Lightning Fast!](https://developers.google.com/web/updates/2011/12/Transferable-Objects-Lightning-Fast) Eric Bidelman, 12.2011 _[Demonstrates](http://html5-demos.appspot.com/static/workers/transferables/index.html) the huge performance improvement for message passing, that can be achieved with [Transferable Objects](https://developer.mozilla.org/en-US/docs/Web/API/Transferable)._
 
 ### Service Workers
 
