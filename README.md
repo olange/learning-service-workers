@@ -14,10 +14,12 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 
 ### Web Workers
 
-* [H5R › The Basics of Web Workers](https://www.html5rocks.com/en/tutorials/workers/basics/) HTML5Rocks, Eric Bidelman, 26.07.2010 _describes_ [Dedicated Workers](https://html.spec.whatwg.org/multipage/workers.html#dedicated-workers-and-the-worker-interface) _from the_ [Web Workers specification](https://html.spec.whatwg.org/multipage/workers.html)_, that are refered to as_ Web Workers; see [#2](../../issues/2) for reading notes
+See [#2](../../issues/2) for reading notes.
+
+* [H5R › The Basics of Web Workers](https://www.html5rocks.com/en/tutorials/workers/basics/) Eric Bidelman, 26.07.2010 _describes_ [Dedicated Workers](https://html.spec.whatwg.org/multipage/workers.html#dedicated-workers-and-the-worker-interface) _from the_ [Web Workers specification](https://html.spec.whatwg.org/multipage/workers.html)_, that are refered to as_ Web Workers
 * [WWG › HTML Living Standard › Web Workers](https://html.spec.whatwg.org/multipage/workers.html) _Specification which defines the API for running scripts in the background, independently of any user interface scripts._
-* [MDN › Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) _describes_ Dedicated- _and_ Shared workers. _A Dedicated Worker is only accessible from the script that first spawned it, whereas Shared Workers can be accessed from multiple scripts._
-* [GWF › Updates › Workers ♥ ArrayBuffer](https://developers.google.com/web/updates/2011/09/Workers-ArrayBuffer) Google Web Fundamentals, Eric Bidelman, 08.2011  
+* [MDN › Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) _describes Dedicated-, Shared- and Service workers, as well as Chrome- and Audio Workers_
+* [GWF › Updates › Workers ♥ ArrayBuffer](https://developers.google.com/web/updates/2011/09/Workers-ArrayBuffer) Eric Bidelman, 08.2011  
   _Typed arrays I/O and [Structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm); no more base64 encoding the data!_
 
 ### Service Workers
