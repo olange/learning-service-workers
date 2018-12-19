@@ -8,7 +8,7 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 
 * [Dedicated workers](https://developer.mozilla.org/en-US/docs/Web/API/Worker) _are utilized by a single script; whereas_
 * [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
-* [Service worker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker) _is a programmable network proxy, that sits between web applications, the browser, and the network — when available —, allowing you to control how network requests from your page are handled. They enable the creation of effective offline experiences, among other things; they also allow access to push notifications, background sync and geofencing APIs._ »
+* [Service workers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker) _are event-driven workers, registered against an origin and a path. They act as a programmable network proxy, that sits between web applications, the browser, and the network — when available —, allowing you to control how network requests from your page are handled. They enable the creation of effective offline experiences, among other things; they also allow access to push notifications, background sync and geofencing APIs._ »
 
 ## Articles: first principles
 
