@@ -55,6 +55,10 @@ See [#2](../../issues/2) for reading notes.
 
 * [Google Developer › Workbox](https://developers.google.com/web/tools/workbox/) _A library for adding offline support to web apps; bakes in a set of best practices and removes the boilerplate every developer writes when working with service workers_
 
+## Experiments
+
+* [01. Web Worker instantiation](experiments/01-instantiation/)
+
 ## Additional resources
 
 * [Learning Streams and Observables](https://github.com/olange/learning-streams) _Learning using Streams, Observables and Transforms with JavaScript – articles, useful resources, personal notes_
