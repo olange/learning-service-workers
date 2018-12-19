@@ -21,6 +21,7 @@ See [#2](../../issues/2) for reading notes.
 * [MDN › Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) _describes Dedicated-, Shared- and Service workers, as well as Chrome- and Audio Workers_
 * [GWF › Updates › Workers ♥ ArrayBuffer](https://developers.google.com/web/updates/2011/09/Workers-ArrayBuffer) Eric Bidelman, 08.2011  
   _Typed arrays I/O and [Structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm); no more base64 encoding the data!_
+* [GWF › Updates › Transferable Objects: Lightning Fast!](https://developers.google.com/web/updates/2011/12/Transferable-Objects-Lightning-Fast) Eric Bidelman, 12.2011 _Demonstrates the huge performance improvement for message passing, that can be achieved with [Transferable Objects](https://developer.mozilla.org/en-US/docs/Web/API/Transferable)._
 
 ### Service Workers
 
@@ -39,6 +40,10 @@ See [#2](../../issues/2) for reading notes.
 * [CDS › Building Faster, More Resilient Apps with Service Worker: A Caching Strategy Deep Dive](https://developer.chrome.com/devsummit/schedule/caching-strategies) Chrome Dev Summit, Ewa Gasperowicz & Phil Walton, 12.11.2018 « […] _Not all service worker implementations are created equal, and they can offer vastly different performance benefits. Every prefetch and cache decision comes with speed vs. freshness and bandwidth vs. storage trade offs. Discover how to evaluate and build different service worker flows for your app, giving the best experience for your users._ »
 
 ## Supporting and related technologies
+
+### Transferable Objects
+
+* [MDN › Web APIs › Transferable Objects](https://developer.mozilla.org/en-US/docs/Web/API/Transferable) _A marker interface, that represents an object that can be transfered between different execution contexts, like the main thread and Web workers. The [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer), [MessagePort](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort) and [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap) types implement this marker interface._
 
 ### Fetching data
 
