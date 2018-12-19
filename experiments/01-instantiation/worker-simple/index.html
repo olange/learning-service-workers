@@ -16,16 +16,18 @@
         font-family: "Lato",sans-serif; font-weight: 300;
         line-height: 1.5; -webkit-font-smoothing: antialiased }
       h1, h2, h3, h4 {
-        font-family: "Roboto",sans-serif; font-weight: 400; }
+        font-family: "Roboto",sans-serif; font-weight: 400 }
       code.block {
         display: block; box-sizing: border-box;
         width: 1080px; padding: 0.5em 1em;
         background-color: #eeeeee; }
+      code.block.error {
+        background-color: #ffdddd; color: #ee0000 }
     </style>
   </head>
   <body>
     <script type="module">
-      const worker = new Worker( "worker.js");
+      const worker = new Worker( "worker.js", { type: "module" });
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
       };
@@ -34,20 +36,32 @@
       };
       worker.postMessage( { opcmd: "sip", args: [ "☕️" ] });
       worker.postMessage( { opcmd: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcmd: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+      worker.postMessage( { opcmd: "listen", args: [ "Shut up and play yer guitar / Ship Ahoy" ] });
     </script>
     <noscript>Please enable JavaScript to view this website.</noscript>
 
-    <h2>Worker instantiation · Classic script</h2>
-    <p>Uses classic script, that simply acknowledges messages it receives,
-      logging them on the console. Classic script instantiated with:</p>
+    <h2>Worker instantiation · Module script</h2>
+    <p>Uses a <em>module script</em>, that simply acknowledges messages it receives,
+      logging them on the console. Module script instantiated with:</p>
     <code class="block">
-        const worker = new Worker( "worker.js");
+      const worker = new Worker( "worker.js", { type: "module" });
     </code>
-    <p>Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
+    <p>Open the Console (<key>CMD-ALT-J</key>), which should display
+      an output similar to this one:</p>
     <img src="assets/console.png" width="1080">
     <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
-      and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
-      <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>
+      and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> out-of-the box,
+      however not by <a href="https://www.google.com/chrome/">Chrome 71</a>,
+      which displays following message:</p>
+    <code class="block error">
+      Uncaught TypeError: Failed to construct 'Worker': Module scripts are not supported
+      on DedicatedWorker yet.<br> You can try the feature with
+      '--enable-experimental-web-platform-features' flag (see https://crbug.com/680046)
+    </code>
+    <p>Starting Chrome with the <code>experimental-web-platform-features<code> flag
+      provides support for instantiating web workers with module scripts.</p>
+    <code class="block">
+       $ open -a "Google Chrome" --args --enable-experimental-web-platform-features
+    </code>
   </body>
 </html>
