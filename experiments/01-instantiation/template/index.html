@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TODO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="TODO" />
+
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato:300|Roboto:400');
+      body {
+        margin: 0; min-height: 100vh; padding: 0 1em;
+        font-family: "Lato",sans-serif; font-weight: 300;
+        line-height: 1.5; -webkit-font-smoothing: antialiased }
+      h1, h2, h3, h4 {
+        font-family: "Roboto",sans-serif; font-weight: 400; }
+    </style>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <script type="module">
+      const worker = new Worker( "worker.js");
+      worker.onmessage = (msg) => {
+        console.log( "index.html › Received message", msg.data);
+      };
+      worker.onerror = (err) => {
+        console.error( "index.html › Received error", err);
+      };
+      worker.postMessage( { opcmd: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcmd: "crunch", args: [ "🍐", "🍪" ] });
+    </script>
+  </body>
+</html>

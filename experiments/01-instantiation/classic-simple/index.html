@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Experiment 01 · Worker instantiation · Classic script</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Example of instantiating a Web Worker with a classic simple script" />
+
+    <link rel="icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato:300|Roboto:400');
+      body {
+        margin: 0; min-height: 100vh; padding: 0 1em;
+        font-family: "Lato",sans-serif; font-weight: 300;
+        line-height: 1.5; -webkit-font-smoothing: antialiased }
+      h1, h2, h3, h4 {
+        font-family: "Roboto",sans-serif; font-weight: 400; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      const worker = new Worker( "worker.js");
+      worker.onmessage = (msg) => {
+        console.log( "index.html › Received message", msg.data);
+      };
+      worker.onerror = (err) => {
+        console.error( "index.html › Received error", err);
+      };
+      worker.postMessage( { opcmd: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcmd: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { opcmd: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+    </script>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+
+    <h2>Worker instantiation · Classic script</h2>
+    <p>Uses classic script, that simply acknowledges messages it receives, logging them on the console.<br>
+      Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
+    <img src="assets/console.png">
+  </body>
+</html>
