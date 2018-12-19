@@ -4,11 +4,11 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 
 [![Join the chat at https://gitter.im/learning-service-workers/Lobby](https://badges.gitter.im/learning-service-workers/Lobby.svg)](https://gitter.im/learning-service-workers/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-« _A_ **Web Worker** _runs the code of a Javascript file in a_ **worker thread**. _The Web Worker is an object, created using a constructor [Worker()](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker). There are different kind of Workers_ (excerpts from [Web Workers Concepts and Usage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API#Web_Workers_concepts_and_usage) and [Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers/)):
+« _A_ [**Web Worker**](https://www.html5rocks.com/en/tutorials/workers/basics/) _runs the code of a Javascript file in an_ isolated **worker thread**. _There are different kind of Workers; in a webapp, the most common are:_
 
-* **Dedicated workers** _are utilized by a single script; whereas_
-* **Shared workers** _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
-* **Service worker** _is a programmable network proxy, that sit between web applications, the browser, and the network (when available), allowing you to control how network requests from your page are handled. Among other things, they enable the creation of effective offline experiences. They will also allow access to push notifications, background sync and geofencing APIs._ »
+* [Dedicated workers](https://developer.mozilla.org/en-US/docs/Web/API/Worker) _are utilized by a single script; whereas_
+* [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
+* [Service worker](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker) _is a programmable network proxy, that sits between web applications, the browser, and the network — when available —, allowing you to control how network requests from your page are handled. They enable the creation of effective offline experiences, among other things; they also allow access to push notifications, background sync and geofencing APIs._ »
 
 ## Articles: first principles
 
