@@ -21,11 +21,13 @@
         console.log( "index.html › Received message", msg.data);
       };
       worker.onerror = (err) => {
-        console.error( "index.html › Received error", err);
+        console.error( "index.html › Received error", err.message);
+        err.preventDefault();
       };
-      worker.postMessage( { opcmd: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcmd: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcmd: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+      worker.postMessage( { opcode: undefined });
     </script>
     <noscript>Please enable JavaScript to view this website.</noscript>
 
