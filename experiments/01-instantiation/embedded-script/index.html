@@ -49,8 +49,9 @@
 
     <main>
       <h2>Experiment 01 · Worker instantiation · Embedded script</h2>
-      <p>Uses a <em>embedded script (as a Blob)</em>, that simply acknowledges messages
-        it receives, logging them on the console. Embedded script instantiated with:</p>
+      <p>Uses a <em>embedded script (as a <a href="chrome://blob-internals/">Blob</a>)</em>,
+        that simply acknowledges messages it receives, logging them on the console.
+        Embedded script instantiated with:</p>
       <code class="block">
         const workerBlob = new Blob( [`self.onmessage = (msg) => { … };`]);<br>
         const workerBlobURL = window.URL.createObjectURL( workerBlob);<br>
