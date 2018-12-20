@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Experiment 01 · Worker instantiation · Classic script</title>
+    <title>Experiment 01 · Worker instantiation · Embedded script</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Example of instantiating a Web Worker with a classic simple script" />
+    <meta name="description" content="Example of instantiating a Web Worker with an embedded simple script" />
 
     <link rel="icon" href="../favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
@@ -16,7 +16,23 @@
   </head>
   <body>
     <script type="module">
-      const worker = new Worker( "worker.js");
+      const workerBlob = new Blob( [
+        `self.onmessage = (msg) => {
+          const data = msg.data;
+          console.log( "worker.js › Received message", data);
+          switch( typeof data.opcode) {
+            case "undefined":
+              throw new Error( \`Barking Pumpkin! Received unknown command \${data.opcode}\`);
+            default:
+              self.postMessage( { ack: msg.data });
+              break;
+          }
+        };`
+      ]);
+
+      const workerBlobURL = window.URL.createObjectURL( workerBlob);
+      const worker = new Worker( workerBlobURL);
+
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
       };
@@ -26,17 +42,19 @@
       };
       worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
       worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+      worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });
       worker.postMessage( { opcode: undefined });
     </script>
     <noscript>Please enable JavaScript to view this website.</noscript>
 
     <main>
-      <h2>Worker instantiation · Classic script</h2>
-      <p>Uses a <em>classic script</em>>, that simply acknowledges messages it receives,
-        logging them on the console. Classic script instantiated with:</p>
+      <h2>Worker instantiation · Embedded script</h2>
+      <p>Uses a <em>embedded script (as a Blob)</em>, that simply acknowledges messages
+        it receives, logging them on the console. Embedded script instantiated with:</p>
       <code class="block">
-        const worker = new Worker( "worker.js");
+        const workerBlob = new Blob( [`self.onmessage = (msg) => { … };`]);<br>
+        const workerBlobURL = window.URL.createObjectURL( workerBlob);<br>
+        const worker = new Worker( workerBlobURL);
       </code>
       <p>Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
       <img src="assets/console.png" width="1080">
