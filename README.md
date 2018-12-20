@@ -10,6 +10,10 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 * [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
 * [Service workers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker) _are event-driven workers, registered against an origin and a path. They act as a programmable network proxy, that sits between web applications, the browser, and the network — when available —, allowing you to control how network requests from your page are handled. They enable the creation of effective offline experiences, among other things; they also allow access to push notifications, background sync and geofencing APIs._ »
 
+## Experiments
+
+* [01. Web Worker instantiation](experiments/01-instantiation/)
+
 ## Articles: fundamentals
 
 ### Web Workers
@@ -54,10 +58,6 @@ See [#2](../../issues/2) for reading notes.
 ### Service Worker Toolchain
 
 * [Google Developer › Workbox](https://developers.google.com/web/tools/workbox/) _A library for adding offline support to web apps; bakes in a set of best practices and removes the boilerplate every developer writes when working with service workers_
-
-## Experiments
-
-* [01. Web Worker instantiation](experiments/01-instantiation/)
 
 ## Additional resources
 
