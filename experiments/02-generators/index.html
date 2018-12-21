@@ -24,18 +24,18 @@
       const worker = new Worker( "worker.js");
       appendMsgTo( output, "div", `t0: <code>new Worker()</code>`);
 
-      worker.postMessage( { opcode: "range", args: [ 0, 10, 1 ] }); // no delay
-      worker.postMessage( { opcode: "range", args: [ 100, 200, 10, 100 ] }); // 50ms delay
-      worker.postMessage( { opcode: "range", args: [ -100, -200, -10, 400 ] }); // 200ms delay
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { name: "range+050", op: "range", args: [ 0, 50, 10 ] });            // no delay
+      worker.postMessage( { name: "range+200", op: "range", args: [ 100, 200, 10, 100 ] });   // 50ms delay
+      worker.postMessage( { name: "range-200", op: "range", args: [ -100, -200, -10, 400 ] });// 200ms delay
+      worker.postMessage( { name: "namedOp01", op: "sip", args: [ "☕️" ] });
+      worker.postMessage( { name: "namedOp02", op: "crunch", args: [ "🍐", "🍪" ] });
 
       setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
         const t1 = performance.now();
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `t${Math.floor( t1-t0)}: <code>${JSON.stringify( msg.data)}</code>`);
+        appendMsgTo( output, "div", `t${Math.floor( t1-t0)} [${msg.data.name}]: ${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${msg.data.result}</code>`);
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
@@ -50,11 +50,11 @@
         The delay determines the time to wait, in milliseconds, before each one returns its next value.</p>
       <code class="block">
         const worker = new Worker( "worker.js");<br>
-        worker.postMessage( { opcode: "range", args: [ 0, 10, 1 ] });             //      0..10 step   1, no delay<br>
-        worker.postMessage( { opcode: "range", args: [ 100, 200, 10, 100 ] });    //   100..200 step  10, 100ms delay<br>
-        worker.postMessage( { opcode: "range", args: [ -100, -200, -10, 400 ] }); // -100..-200 step -10, 400ms delay<br>
-        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
-        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
+        worker.postMessage( { name: "range+050", op: <strong>"range"</strong>, args: [ <strong>0, 50, 10</strong> ] });<br>
+        worker.postMessage( { name: "range+200", op: <strong>"range"</strong>, args: [ <strong>100, 200, 10, 100</strong> ] });<br>
+        worker.postMessage( { name: "range-200", op: <strong>"range"</strong>, args: [ <strong>-100, -200, -10, 400</strong> ] });<br>
+        worker.postMessage( { name: "namedOp01", op: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { name: "namedOp02", op: "crunch", args: [ "🍐", "🍪" ] });<br>
       </code>
       <output></output>
       <p>Observe that each call to <code>postMessage()</code> automatically spawns

@@ -26,15 +26,14 @@ async function* range( min, max, step = 1, delay = undefined) {
 self.onmessage = async (msg) => {
   const data = msg.data;
   console.log( "worker.js › Received message", data);
-  switch( data.opcode) {
+  switch( data.op) {
     case "sip":
     case "crunch":
-      self.postMessage( { [data.opcode]: data.args });
+      self.postMessage( { ...data, result: "ack" });
       break;
     case "range":
-      const name = `range(${data.args})`;
       for await (let val of range( ...data.args)) {
-        self.postMessage( { [name]: val });
+        self.postMessage( { ...data, result: val });
       }
       break;
     default:
