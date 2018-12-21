@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Experiment 02 · Generators</title>
+    <title>Experiment 02 · Async Generators</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Uses workers and sub-workers to generate some lists of data" />
+    <meta name="description" content="Uses workers and sub-workers to asynchronously generate lists of data" />
 
     <link rel="icon" href="../favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
@@ -19,23 +19,52 @@
     <script type="module">
       import { appendMsgTo } from "../shared-func.js";
       const output = document.querySelector( "output");
+      const t0 = performance.now();
 
       const worker = new Worker( "worker.js");
+      appendMsgTo( output, "div", `t0: <code>new Worker()</code>`);
+
+      worker.postMessage( { opcode: "range", args: [ 0, 10, 1 ] }); // no delay
+      worker.postMessage( { opcode: "range", args: [ 100, 200, 10, 100 ] }); // 50ms delay
+      worker.postMessage( { opcode: "range", args: [ -100, -200, -10, 400 ] }); // 200ms delay
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
       worker.onmessage = (msg) => {
+        const t1 = performance.now();
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
+        appendMsgTo( output, "div", `t${Math.floor( t1-t0)}: <code>${JSON.stringify( msg.data)}</code>`);
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
         appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
     </script>
 
     <main>
-      <h2>Experiment 02 · Generators</h2>
+      <h2>Experiment 02 · Async Generators</h2>
+      <p>Three async <code>range( min, max, step, delay)</code> generator functions run in parallel.<br>
+        The delay determines the time to wait, in milliseconds, before it returns its next value.</p>
+      <p>Observe that each call to <code>postMessage()</code> automatically spawns
+        an independent background execution — by the virtue of the <em>event-model</em>
+        used to communicate with Web Workers — and that the results of each range
+        are delivered <em>interleaved</em>, not in the exact same sequence as the
+        <code>postMessage()</code> calls.</p>
+      <p>Note: in the results hereafter, the time elapsed since inception of the Web Worker
+        is displayed to the left, in milliseconds. Execution of the Web Worker is terminated
+        after a timeout of 6000ms, to avoid infinite execution (changing step to zero, for
+        instance, would produce an infinite range of the same value).</p>
+      <code class="block">
+        const worker = new Worker( "worker.js");<br>
+        worker.postMessage( { opcode: "range", args: [ 0, 10, 1 ] });             //      0..10 step   1, no delay<br>
+        worker.postMessage( { opcode: "range", args: [ 100, 200, 10, 100 ] });    //   100..200 step  10, 100ms delay<br>
+        worker.postMessage( { opcode: "range", args: [ -100, -200, -10, 400 ] }); // -100..-200 step -10, 400ms delay<br>
+        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
+      </code>
       <output></output>
     </main>
 

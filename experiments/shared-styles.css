@@ -6,15 +6,20 @@ body {
 h1, h2, h3, h4 {
   font-family: "Roboto",sans-serif; font-weight: 400; }
 
+main {
+  max-width: 1080px; }
+
 nav {
   position: absolute; top: 0 }
 
-nav a { display: inline-block; padding: .5em .5em 0 0; }
+nav a {
+  display: inline-block;
+  padding: .5em .5em 0 0; }
 
 code.block {
   display: block; box-sizing: border-box;
-  width: 1080px; padding: 0.5em 1em;
-  background-color: #eeeeee; }
+  min-width: 100%; padding: 0.5em 1em;
+  background-color: #d0f0ff; }
 
 code.block.error {
   background-color: #ffdddd; color: #ee0000 }
@@ -22,5 +27,9 @@ code.block.error {
 output {
   display: grid; box-sizing: border-box;
   grid-auto-flow: row;
-  width: 1080px; padding: 0.5em 1em;
+  min-width: 100%; padding: 0.5em 1em;
   background-color: #fff2da }
+
+/* Prevent grid blowout */
+img { max-width: 100%; }
+output, pre { max-width: 100%; overflow: hidden; }
