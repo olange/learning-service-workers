@@ -3,17 +3,17 @@ function sleep( ms) {
 }
 
 async function* range( min, max, step = 1, delay = undefined) {
-  console.log( `range(${min}, ${max}, ${step}, ${delay})`);
+  console.log( `worker.js › range(${min}, ${max}, ${step}, ${delay}) async generator function started iteration`);
   console.assert( typeof delay === "undefined" || typeof delay === "number",
-    `delay should be either undefined or a number (${delay})`);
+    `worker.js › range() › delay should be either undefined or a number (${delay})`);
   console.assert( typeof min === "number" && typeof max === "number" && typeof step === "number",
-    `min, max and step should numbers (${min}, ${max} and ${step})`);
-  console.assert( step != 0, `To guard against infinite range,
+    `worker.js › range() › min, max and step should numbers (${min}, ${max} and ${step})`);
+  console.assert( step != 0, `worker.js › range() › To guard against infinite range,
     step should be strictly positive or negative (${step})`);
   if( step > 0) console.assert( min <= max,
-    `When step (${step}) is positive, min (${min}) <= max (${max})`);
+    `worker.js › range() › When step (${step}) is positive, min (${min}) <= max (${max})`);
   if( step < 0) console.assert( min >= max,
-    `When step (${step}) is negative, min (${min}) >= max (${max})`);
+    `worker.js › range() › When step (${step}) is negative, min (${min}) >= max (${max})`);
 
   let i = min;
   for(; step >= 0 ? i <= max : i >= max; i += step) {
@@ -29,6 +29,7 @@ self.onmessage = async (msg) => {
   switch( data.op) {
     case "sip":
     case "crunch":
+    case "listen":
       self.postMessage( { ...data, result: "ack" });
       break;
     case "range":

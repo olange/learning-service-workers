@@ -8,6 +8,7 @@
 
     <link rel="icon" href="../../favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
 
     <style>
       @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400|Roboto+Mono:300");
@@ -25,8 +26,8 @@
       appendMsgTo( output, "div", `t0: <code>new Worker()</code>`);
 
       worker.postMessage( { name: "range+050", op: "range", args: [ 0, 50, 10 ] });            // no delay
-      worker.postMessage( { name: "range+200", op: "range", args: [ 100, 200, 10, 100 ] });   // 50ms delay
-      worker.postMessage( { name: "range-200", op: "range", args: [ -100, -200, -10, 400 ] });// 200ms delay
+      worker.postMessage( { name: "range+200", op: "range", args: [ 100, 200, 10, 100 ] });    // 100ms delay
+      worker.postMessage( { name: "range-200", op: "range", args: [ -100, -200, -10, 400 ] }); // 400ms delay
       worker.postMessage( { name: "namedOp01", op: "sip", args: [ "☕️" ] });
       worker.postMessage( { name: "namedOp02", op: "crunch", args: [ "🍐", "🍪" ] });
 
@@ -35,7 +36,8 @@
       worker.onmessage = (msg) => {
         const t1 = performance.now();
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `t${Math.floor( t1-t0)} [${msg.data.name}]: ${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${msg.data.result}</code>`);
+        appendMsgTo( output, "div",
+          `t${Math.floor( t1-t0)} [${msg.data.name}]: ${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
@@ -57,6 +59,7 @@
         worker.postMessage( { name: "namedOp02", op: "crunch", args: [ "🍐", "🍪" ] });<br>
       </code>
       <output></output>
+
       <p>Observe that each call to <code>postMessage()</code> automatically spawns
         an independent background execution — by the virtue of the <em>event-model</em>
         used to communicate with Web Workers — and that the results of each range
@@ -66,6 +69,10 @@
         is displayed to the left, in milliseconds. Execution of the Web Worker is terminated
         after a timeout of 6000ms, to avoid infinite execution (changing step to zero, for
         instance, would produce an infinite range of the same value).</p>
+
+      <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
+        and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
+        <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>
     </main>
 
     <nav>
