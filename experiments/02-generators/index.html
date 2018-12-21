@@ -46,17 +46,8 @@
 
     <main>
       <h2>Experiment 02 · Async Generators</h2>
-      <p>Three async <code>range( min, max, step, delay)</code> generator functions run in parallel.<br>
-        The delay determines the time to wait, in milliseconds, before it returns its next value.</p>
-      <p>Observe that each call to <code>postMessage()</code> automatically spawns
-        an independent background execution — by the virtue of the <em>event-model</em>
-        used to communicate with Web Workers — and that the results of each range
-        are delivered <em>interleaved</em>, not in the exact same sequence as the
-        <code>postMessage()</code> calls.</p>
-      <p>Note: in the results hereafter, the time elapsed since inception of the Web Worker
-        is displayed to the left, in milliseconds. Execution of the Web Worker is terminated
-        after a timeout of 6000ms, to avoid infinite execution (changing step to zero, for
-        instance, would produce an infinite range of the same value).</p>
+      <p>Three async <code>range( min, max, step, delay)</code> generator functions run in parallel and in background.<br>
+        The delay determines the time to wait, in milliseconds, before each one returns its next value.</p>
       <code class="block">
         const worker = new Worker( "worker.js");<br>
         worker.postMessage( { opcode: "range", args: [ 0, 10, 1 ] });             //      0..10 step   1, no delay<br>
@@ -66,6 +57,15 @@
         worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
       </code>
       <output></output>
+      <p>Observe that each call to <code>postMessage()</code> automatically spawns
+        an independent background execution — by the virtue of the <em>event-model</em>
+        used to communicate with Web Workers — and that the results of each range
+        are delivered <em>interleaved</em>, not in the exact same sequence as the
+        <code>postMessage()</code> calls.</p>
+      <p>Note: in the results hereafter, the time elapsed since inception of the Web Worker
+        is displayed to the left, in milliseconds. Execution of the Web Worker is terminated
+        after a timeout of 6000ms, to avoid infinite execution (changing step to zero, for
+        instance, would produce an infinite range of the same value).</p>
     </main>
 
     <nav>
