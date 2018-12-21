@@ -8,6 +8,7 @@
 
     <link rel="icon" href="../favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
 
     <style>
       @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400|Roboto+Mono:300");
@@ -21,14 +22,16 @@
       const output = document.querySelector( "output");
 
       const worker = new Worker( "worker.js");
-      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
       worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
       worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
 
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
+        appendMsgTo( output, "div",
+          `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
