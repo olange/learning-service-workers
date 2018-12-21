@@ -21,6 +21,14 @@
       const output = document.querySelector( "output");
 
       const worker = new Worker( "worker.js");
+
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+      worker.postMessage( { opcode: undefined });
+
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
         appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
@@ -30,23 +38,25 @@
         appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });
-      worker.postMessage( { opcode: undefined });
     </script>
 
     <main>
       <h2>Experiment 01 · Worker instantiation · Classic script</h2>
-      <output></output>
 
       <p>Uses a <em>classic script</em>>, that simply acknowledges messages it receives,
         logging them on the console. Classic script instantiated with:</p>
       <code class="block">
-        const worker = new Worker( "worker.js");
+        const worker = <strong>new Worker( "worker.js")</strong>;<br>
+        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
+        worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });<br>
+        worker.postMessage( { opcode: undefined });<br>
       </code>
+      <output></output>
+
       <p>Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
       <img src="assets/console.png" width="1080">
+
       <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
         and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
         <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>

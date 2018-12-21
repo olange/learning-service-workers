@@ -20,7 +20,15 @@
       import { appendMsgTo } from "../../shared-func.js";
       const output = document.querySelector( "output");
 
-      const worker = new Worker( "worker.js", { type: "module" });
+      const worker = new Worker( "worker.js", { type: "module" }); // Note the `type: "module"` option
+
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { opcode: "listen", args: [ "Shut up and play yer guitar / Ship Ahoy" ] });
+      worker.postMessage( { opcode: undefined });
+
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
         appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
@@ -30,24 +38,26 @@
         appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcode: "listen", args: [ "Shut up and play yer guitar / Ship Ahoy" ] });
-      worker.postMessage( { opcode: undefined });
     </script>
 
     <main>
       <h2>Experiment 01 · Worker instantiation · Module script</h2>
-      <output></output>
 
       <p>Uses a <em>module script</em>, that simply acknowledges messages it receives,
         logging them on the console. Module script instantiated with:</p>
       <code class="block">
-        const worker = new Worker( "worker.js", { type: "module" });
+        const worker = new Worker( "worker.js", <strong>{ type: "module" }</strong>); // Note the type: "module"` option<br>
+        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
+        worker.postMessage( { opcode: "listen", args: [ "Shut up and play yer guitar / Ship Ahoy" ] });<br>
+        worker.postMessage( { opcode: undefined });<br>
       </code>
+      <output></output>
+
       <p>Open the Console (<key>CMD-ALT-J</key>), which should display
         an output similar to this one:</p>
       <img src="assets/console.png" width="1080">
+
       <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
         and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> out-of-the box,
         however not by <a href="https://www.google.com/chrome/">Chrome 71</a>,

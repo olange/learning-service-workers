@@ -33,9 +33,15 @@
           }
         };`
       ]);
-
       const workerBlobURL = window.URL.createObjectURL( workerBlob);
       const worker = new Worker( workerBlobURL);
+
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });
+      worker.postMessage( { opcode: undefined });
+
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
@@ -46,26 +52,28 @@
         appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });
-      worker.postMessage( { opcode: undefined });
     </script>
 
     <main>
       <h2>Experiment 01 · Worker instantiation · Embedded script</h2>
-      <output></output>
 
       <p>Uses a <em>embedded script (as a <a href="chrome://blob-internals/">Blob</a>)</em>,
         that simply acknowledges messages it receives, logging them on the console.
         Embedded script instantiated with:</p>
       <code class="block">
-        const workerBlob = new Blob( [`self.onmessage = (msg) => { … };`]);<br>
+        const workerBlob = new <strong>Blob( [`self.onmessage = (msg) => { … };`])</strong>;<br>
         const workerBlobURL = window.URL.createObjectURL( workerBlob);<br>
-        const worker = new Worker( workerBlobURL);
+        const worker = new Worker( workerBlobURL);<br>
+        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
+        worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });<br>
+        worker.postMessage( { opcode: undefined });
       </code>
+      <output></output>
+
       <p>Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
       <img src="assets/console.png" width="1080">
+
       <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
         and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
         <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>
