@@ -31,7 +31,7 @@ code.block {
   width: 100%; padding: 0.5em 1em;
   background-color: #d0f0ff }
 
-code.block.error {
+code.error {
   background-color: #ffdddd; color: #ee0000 }
 
 output {
