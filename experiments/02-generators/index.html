@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Uses workers and sub-workers to generate some lists of data" />
 
-    <link rel="icon" href="../../favicon.ico" />
+    <link rel="icon" href="../favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
 
     <style>
       @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400");
-      @import url("../../shared-styles.css");
+      @import url("../shared-styles.css");
     </style>
   </head>
   <body>
     <noscript>Please enable JavaScript to view this website.</noscript>
     <script type="module">
-      import { appendMsgTo } from "../../shared-func.js";
+      import { appendMsgTo } from "../shared-func.js";
       const output = document.querySelector( "output");
 
       const worker = new Worker( "worker.js");
