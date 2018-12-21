@@ -21,6 +21,11 @@
       const output = document.querySelector( "output");
 
       const worker = new Worker( "worker.js");
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
         appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
@@ -30,8 +35,6 @@
         appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
     </script>
 
     <main>
