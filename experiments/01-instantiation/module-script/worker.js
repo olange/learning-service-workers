@@ -6,7 +6,7 @@ self.onmessage = (msg) => {
       throw new Error( `Spook! Received unknown command ${data.opcode}`);
       break;
     default:
-      self.postMessage( { ack: msg.data });
+      self.postMessage( { ack: data });
       break;
   }
 };

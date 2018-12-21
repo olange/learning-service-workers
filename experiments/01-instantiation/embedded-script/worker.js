@@ -5,7 +5,7 @@ self.onmessage = (msg) => {
     case "undefined":
       throw new Error( `Holy cow! Received unknown command ${data.opcode}`);
     default:
-      self.postMessage( { ack: msg.data });
+      self.postMessage( { ack: data });
       break;
   }
 };

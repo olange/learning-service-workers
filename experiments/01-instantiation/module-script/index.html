@@ -15,13 +15,19 @@
     </style>
   </head>
   <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
     <script type="module">
+      import { appendMsgTo } from "../../shared-func.js";
+      const output = document.querySelector( "output");
+
       const worker = new Worker( "worker.js", { type: "module" });
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
+        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
+        appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
       worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
@@ -29,10 +35,11 @@
       worker.postMessage( { opcode: "listen", args: [ "Shut up and play yer guitar / Ship Ahoy" ] });
       worker.postMessage( { opcode: undefined });
     </script>
-    <noscript>Please enable JavaScript to view this website.</noscript>
 
     <main>
       <h2>Experiment 01 · Worker instantiation · Module script</h2>
+      <output></output>
+
       <p>Uses a <em>module script</em>, that simply acknowledges messages it receives,
         logging them on the console. Module script instantiated with:</p>
       <code class="block">
@@ -56,6 +63,7 @@
         $ open -a "Google Chrome" --args --enable-experimental-web-platform-features
       </code>
     </main>
+
     <nav>
       <a href="../../">home</a>
       <a href="../classic-script/">classic-script</a>

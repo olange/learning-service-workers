@@ -15,7 +15,11 @@
     </style>
   </head>
   <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
     <script type="module">
+      import { appendMsgTo } from "../../shared-func.js";
+      const output = document.querySelector( "output");
+
       const workerBlob = new Blob( [
         `self.onmessage = (msg) => {
           const data = msg.data;
@@ -35,9 +39,11 @@
 
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
+        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
+        appendMsgTo( output, "div", err.message);
         err.preventDefault();
       };
       worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
@@ -45,10 +51,11 @@
       worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });
       worker.postMessage( { opcode: undefined });
     </script>
-    <noscript>Please enable JavaScript to view this website.</noscript>
 
     <main>
       <h2>Experiment 01 · Worker instantiation · Embedded script</h2>
+      <output></output>
+
       <p>Uses a <em>embedded script (as a <a href="chrome://blob-internals/">Blob</a>)</em>,
         that simply acknowledges messages it receives, logging them on the console.
         Embedded script instantiated with:</p>
@@ -63,6 +70,7 @@
         and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
         <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>
     </main>
+
     <nav>
       <a href="../../">home</a>
       <a href="../classic-script/">classic-script</a>

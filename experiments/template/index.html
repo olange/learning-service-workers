@@ -28,6 +28,7 @@
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
         appendMsgTo( output, "div", err.message);
+        err.preventDefault();
       };
       worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
       worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
