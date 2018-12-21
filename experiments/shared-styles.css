@@ -1,6 +1,6 @@
 body {
   margin: 0; min-height: 100vh; padding: 1em 1em 0;
-  font-family: "Lato",sans-serif; font-weight: 300;
+  font-family: "Lato", sans-serif; font-weight: 300;
   line-height: 1.5; -webkit-font-smoothing: antialiased }
 
 h1, h2, h3, h4 {
@@ -10,28 +10,34 @@ code, output, pre {
   font-family: 'Roboto Mono', monospace; font-weight: 300;
   font-size: 14px; }
 
+main, nav {
+  width: 100%;
+  min-width: 600px;
+  max-width: 1080px }
+
 main {
-  max-width: 1080px; }
+  margin-top: 2em; }
 
 nav {
-  position: absolute; top: 0 }
+  position: absolute; top: 0; }
 
 nav a {
   display: inline-block;
   padding: .5em .5em 0 0; }
 
 code.block {
-  display: block; box-sizing: border-box;
-  min-width: 100%; padding: 0.5em 1em;
-  background-color: #d0f0ff; }
+  display: block;
+  box-sizing: border-box;
+  width: 100%; padding: 0.5em 1em;
+  background-color: #d0f0ff }
 
 code.block.error {
   background-color: #ffdddd; color: #ee0000 }
 
 output {
-  display: grid; box-sizing: border-box;
-  grid-auto-flow: row;
-  min-width: 100%; padding: 0.5em 1em;
+  display: grid; grid-auto-flow: row;
+  box-sizing: border-box;
+  width: 100%; padding: 0.5em 1em;
   background-color: #fff2da }
 
 /* Prevent grid blowout */
