@@ -18,3 +18,9 @@ code.block {
 
 code.block.error {
   background-color: #ffdddd; color: #ee0000 }
+
+output {
+  display: grid; box-sizing: border-box;
+  grid-auto-flow: row;
+  width: 1080px; padding: 0.5em 1em;
+  background-color: #fff2da }
