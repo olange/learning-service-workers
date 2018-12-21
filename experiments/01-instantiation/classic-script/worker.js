@@ -1,11 +1,11 @@
 self.onmessage = (msg) => {
   const data = msg.data;
   console.log( "worker.js › Received message", data);
-  switch( typeof data.opcode) {
+  switch( typeof data.op) {
     case "undefined":
-      throw new Error( `Holy cow! Received unknown command ${data.opcode}`);
+      throw new Error( `Holy Mönch! Received unknown command (${data.op})`);
     default:
-      self.postMessage( { ack: data });
+      self.postMessage( { ...data, result: "ack" });
       break;
   }
 };

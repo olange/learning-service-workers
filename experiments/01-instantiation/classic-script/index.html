@@ -22,16 +22,16 @@
 
       const worker = new Worker( "worker.js");
 
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });
-      worker.postMessage( { opcode: undefined });
+      worker.postMessage( { op: "sip", args: [ "☕️" ] });
+      worker.postMessage( { op: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { op: "listen", args: [ "Miles Ahead / Gone 2015" ] });
+      worker.postMessage( { op: undefined });
 
       setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
+        appendMsgTo( output, "div", `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${msg.data.result}</code>`);
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
@@ -47,15 +47,15 @@
         logging them on the console. Classic script instantiated with:</p>
       <code class="block">
         const worker = <strong>new Worker( "worker.js")</strong>;<br>
-        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
-        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
-        worker.postMessage( { opcode: "listen", args: [ "Miles Ahead / Gone 2015" ] });<br>
-        worker.postMessage( { opcode: undefined });<br>
+        worker.postMessage( { op: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { op: "crunch", args: [ "🍐", "🍪" ] });<br>
+        worker.postMessage( { op: "listen", args: [ "Miles Ahead / Gone 2015" ] });<br>
+        worker.postMessage( { op: undefined });<br>
       </code>
       <output></output>
 
       <p>Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
-      <img src="assets/console.png" width="1080">
+      <img src="assets/console.png">
 
       <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
         and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and

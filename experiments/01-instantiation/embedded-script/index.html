@@ -24,11 +24,11 @@
         `self.onmessage = (msg) => {
           const data = msg.data;
           console.log( "worker.js › Received message", data);
-          switch( typeof data.opcode) {
+          switch( typeof data.op) {
             case "undefined":
-              throw new Error( \`Barking Pumpkin! Received unknown command \${data.opcode}\`);
+              throw new Error( \`Spooky groove! Received unknown command (\${data.op})\`);
             default:
-              self.postMessage( { ack: msg.data });
+              self.postMessage( { ...data, result: "ack" });
               break;
           }
         };`
@@ -36,16 +36,16 @@
       const workerBlobURL = window.URL.createObjectURL( workerBlob);
       const worker = new Worker( workerBlobURL);
 
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
-      worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });
-      worker.postMessage( { opcode: undefined });
+      worker.postMessage( { op: "sip", args: [ "☕️" ] });
+      worker.postMessage( { op: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { op: "listen", args: [ "Jaco / Portrait of Tracy" ] });
+      worker.postMessage( { op: undefined });
 
       setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
+        appendMsgTo( output, "div", `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${msg.data.result}</code>`);
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
@@ -64,15 +64,15 @@
         const workerBlob = new <strong>Blob( [`self.onmessage = (msg) => { … };`])</strong>;<br>
         const workerBlobURL = window.URL.createObjectURL( workerBlob);<br>
         const worker = new Worker( workerBlobURL);<br>
-        worker.postMessage( { opcode: "sip", args: [ "☕️" ] });<br>
-        worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });<br>
-        worker.postMessage( { opcode: "listen", args: [ "Jaco / Portrait of Tracy" ] });<br>
-        worker.postMessage( { opcode: undefined });
+        worker.postMessage( { op: "sip", args: [ "☕️" ] });<br>
+        worker.postMessage( { op: "crunch", args: [ "🍐", "🍪" ] });<br>
+        worker.postMessage( { op: "listen", args: [ "Jaco / Portrait of Tracy" ] });<br>
+        worker.postMessage( { op: undefined });
       </code>
       <output></output>
 
       <p>Open the Console (<key>CMD-ALT-J</key>), which should display an output similar to this one:</p>
-      <img src="assets/console.png" width="1080">
+      <img src="assets/console.png">
 
       <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
         and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
