@@ -13,6 +13,7 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 ## Experiments
 
 * [01. Web Worker instantiation](experiments/01-instantiation/)
+* [02. Generators](experiments/02-generators/)
 
 ## Articles: fundamentals
 
