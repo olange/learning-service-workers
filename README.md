@@ -12,8 +12,8 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 
 ## Experiments
 
-* [01. Web Worker instantiation](experiments/01-instantiation/) Classic-, Module- and Embedded scripts
-* [02. Async Generators](experiments/02-generators/) Single worker, delegating to multiple subworkers
+* [01. Web Worker instantiation](experiments/01-instantiation/) Classic-, Module- or Embedded script
+* [02. Async Generators](experiments/02-generators/) Single worker, or delegation to multiple subworkers
 
 ## Articles: fundamentals
 
