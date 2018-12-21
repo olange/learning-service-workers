@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Experiment 02 · Generators</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Uses workers and sub-workers to generate some lists of data" />
+
+    <link rel="icon" href="../../favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400");
+      @import url("../../shared-styles.css");
+    </style>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <script type="module">
+      import { appendMsgTo } from "../../shared-func.js";
+      const output = document.querySelector( "output");
+
+      const worker = new Worker( "worker.js");
+      worker.onmessage = (msg) => {
+        console.log( "index.html › Received message", msg.data);
+        appendMsgTo( output, "div", `{ ack: { opcode: ${msg.data.ack.opcode}, args: [${msg.data.ack.args.join(',')}] } }`)
+      };
+      worker.onerror = (err) => {
+        console.error( "index.html › Received error", err.message);
+        appendMsgTo( output, "div", err.message);
+        err.preventDefault();
+      };
+      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
+      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+    </script>
+
+    <main>
+      <h2>Experiment 02 · Generators</h2>
+      <output></output>
+    </main>
+
+    <nav>
+      <a href="../../">home</a>
+    </nav>
+  </body>
+</html>
