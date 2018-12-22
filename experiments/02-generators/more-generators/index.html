@@ -26,10 +26,13 @@
       appendMsgTo( output, "div", `t0: <code>new Worker()</code>`);
 
       worker.postMessage( { name: "helix+001", op: "helix", args: [ ] });
-      worker.postMessage( { name: "felix+001", op: "felix", args: [ ] });
-      worker.postMessage( { name: "zelig+001", op: "zelig", args: [ ] });
+      worker.postMessage( { name: "felix+001", op: "felix", args: [ 11, 20, 1, 250 ] });
+      worker.postMessage( { name: "zelig+001", op: "zelig", args: [ 21, 30, 1, 400 ] });
 
-      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+      setTimeout(() => {
+          console.warn( "index.html › timeout( 5000) › Force-terminating worker ")
+          worker.terminate();
+        }, 5000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
         const t1 = performance.now();

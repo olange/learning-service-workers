@@ -23,6 +23,13 @@ async function* range( min, max, step = 1, delay = undefined) {
   }
 }
 
+async function* helix( delay = undefined) {
+  for(let i = 0; i <= 500; i += 1) {
+    yield [ i, i, i];
+    if( delay) await sleep( delay);
+  }
+}
+
 self.onmessage = async (msg) => {
   const data = msg.data;
   console.log( "worker.js › Received message", data);
@@ -32,11 +39,23 @@ self.onmessage = async (msg) => {
     case "listen":
       self.postMessage( { ...data, result: "ack" });
       break;
-    case "range":
-      for await (let val of range( ...data.args)) {
-        self.postMessage( { ...data, result: val });
+    case "helix": {
+      let values = [];
+      for await (let val of helix( ...data.args)) {
+        values.push( val);
       }
+      self.postMessage( { ...data, result: values });
       break;
+    }
+    case "felix":
+    case "zelig": {
+      let values = [];
+      for await (let val of range( ...data.args)) {
+        values.push( val);
+      }
+      self.postMessage( { ...data, result: values });
+      break;
+    }
     default:
       throw new Error( `Zapit! Received unknown command ${data.opcode}`);
   }
