@@ -7,13 +7,20 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 « _A_ [**Web Worker**](https://www.html5rocks.com/en/tutorials/workers/basics/) _runs the code of a Javascript file in an_ isolated **worker thread**. _There are different kind of Workers; in a webapp, the most common are:_
 
 * [Dedicated workers](https://developer.mozilla.org/en-US/docs/Web/API/Worker) _are utilized by a single script; whereas_
-* [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
+* [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames — as long as they are in the same domain as the worker; as of 12.2018, they have little support in mobile browsers though;_
 * [Service workers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker) _are event-driven workers, registered against an origin and a path. They act as a programmable network proxy, that sits between web applications, the browser, and the network — when available —, allowing you to control how network requests from your page are handled. They enable the creation of effective offline experiences, among other things; they also allow access to push notifications, background sync and geofencing APIs._ »
+
+| Use cases |   |
+|:----------|---|
+| Prefetching and/or caching data for later use | Analyzing video or audio data |
+| Code syntax highlighting or other real-time text formatting | Spell checker |
+| Background I/O or polling of webservices | Updating many rows of a local web database |
+| Processing large arrays or humungous JSON responses | Image filtering in <canvas> |
 
 ## Experiments
 
 * [01. Web Worker instantiation](experiments/01-instantiation/) Classic-, Module- or Embedded script
-* [02. Async Generators](experiments/02-generators/) Single worker, or delegation to multiple subworkers
+* [02. Async Generators](experiments/02-generators/) Single worker, delegation to multiple subworkers, async generator functions to play with
 
 ## Articles: fundamentals
 
@@ -38,11 +45,15 @@ See [#2](../../issues/2) for reading notes.
 
 * [H5R › A Beginner's Guide to Using the Application Cache](https://www.html5rocks.com/en/tutorials/appcache/beginner/) HTML5Rocks, Eric Bidelman, 18.06.2010 (published) / 29.10.2013 (updated)
 
-## Videos
+## Videos & Teaching games
 
 ### Web Workers
 
 * [CDS › Building Faster, More Resilient Apps with Service Worker: A Caching Strategy Deep Dive](https://developer.chrome.com/devsummit/schedule/caching-strategies) Chrome Dev Summit, Ewa Gasperowicz & Phil Walton, 12.11.2018 « […] _Not all service worker implementations are created equal, and they can offer vastly different performance benefits. Every prefetch and cache decision comes with speed vs. freshness and bandwidth vs. storage trade offs. Discover how to evaluate and build different service worker flows for your app, giving the best experience for your users._ »
+
+### Service workers
+
+* [Mastery Games › Service Workies](https://serviceworkies.mastery.games/) A collaborative project by geddski & Google Developers « _Learn Service Workers inside and out with the new PWA Mastery Game_ » (Displayed at $229 — currently free, as of 12.2018)
 
 ## Supporting and related technologies
 
