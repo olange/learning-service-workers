@@ -7,13 +7,20 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 « _A_ [**Web Worker**](https://www.html5rocks.com/en/tutorials/workers/basics/) _runs the code of a Javascript file in an_ isolated **worker thread**. _There are different kind of Workers; in a webapp, the most common are:_
 
 * [Dedicated workers](https://developer.mozilla.org/en-US/docs/Web/API/Worker) _are utilized by a single script; whereas_
-* [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames…, as long as they are in the same domain as the worker:_
+* [Shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker) _are workers that can be utilized by multiple scripts running in different windows, IFrames — as long as they are in the same domain as the worker; as of 12.2018, they have little support in mobile browsers though;_
 * [Service workers](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker) _are event-driven workers, registered against an origin and a path. They act as a programmable network proxy, that sits between web applications, the browser, and the network — when available —, allowing you to control how network requests from your page are handled. They enable the creation of effective offline experiences, among other things; they also allow access to push notifications, background sync and geofencing APIs._ »
+
+| Use cases |   |
+|-----------|---|
+| Prefetching and/or caching data for later use | Analyzing video or audio data |
+| Code syntax highlighting or other real-time text formatting | Spell checker |
+| Background I/O or polling of webservices | Updating many rows of a local web database |
+| Processing large arrays or humungous JSON responses | Image filtering in <canvas> |
 
 ## Experiments
 
 * [01. Web Worker instantiation](experiments/01-instantiation/) Classic-, Module- or Embedded script
-* [02. Async Generators](experiments/02-generators/) Single worker, or delegation to multiple subworkers
+* [02. Async Generators](experiments/02-generators/) Single worker, delegation to multiple subworkers, async generator functions to play with
 
 ## Articles: fundamentals
 
