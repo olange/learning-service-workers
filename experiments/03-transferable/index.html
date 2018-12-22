@@ -90,6 +90,19 @@
 
     <main>
       <h2>Experiment 03 · Transferable objects</h2>
+
+      <p>The Browser uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm"
+        ><em>structured clone algorithm</em></a> to pass data in/out of Workers; it
+        supports complex data types, such as <code>File</code>, <code>Blob</code>,
+        <code>ArrayBuffer</code>, but the copy can take hundreds of milliseconds for
+        large objects. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Transferable"
+        >Transferable</a> objects can be transfered from one context to the other; it
+        is a zero-copy.</p>
+      <p>In this experiment, we apply different filters to copies of a source image, the heavy-lifting
+        of the filtering is delegated to a worker, and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageData"
+        ><code>ImageData</code></a> is passed in/out as a <code>Transferable</code> object. We wanted to
+        check whether or not it works in different desktop and mobile browsers – it seems well supported.</p>
+
       <output></output>
 
       <p>Source image</p>
@@ -100,6 +113,10 @@
       <canvas id="filteredImage1" title="Filtered image (first copy)"></canvas>
       <canvas id="filteredImage2" title="Filtered image (second copy)"></canvas>
       <canvas id="filteredImage3" title="Filtered image (third copy)"></canvas>
+
+      <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
+        and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
+        <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>
     </main>
 
     <nav>
