@@ -13,13 +13,21 @@
     <style>
       @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400|Roboto+Mono:300");
       @import url("../shared-styles.css");
+
+      img, canvas { max-height: 400px }
     </style>
   </head>
   <body>
     <noscript>Please enable JavaScript to view this website.</noscript>
     <script type="module">
       import { appendMsgTo } from "../shared-func.js";
+
       const output = document.querySelector( "output");
+      const canvas1 = document.getElementById( "filteredImage1");
+      const canvas2 = document.getElementById( "filteredImage2");
+      const img = document.getElementById( "sourceImage");
+      const context1 = canvas1.getContext( "2d");
+      const context2 = canvas2.getContext( "2d");
 
       const worker = new Worker( "worker.js");
 
@@ -30,9 +38,25 @@
       setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
-        console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div",
-          `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
+        const data = msg.data;
+        console.log( "index.html › Received message", data);
+        switch( data.op) {
+          case "filter":
+            appendMsgTo( output, "div",
+              `${data.op}(${JSON.stringify( data.args)}) ➝ <code>${data.result.toString()} (length: ${data.result.data.length})</code>`);
+            switch( data.args.canvas) {
+              case "filteredImage1":
+                context1.putImageData( data.result, 0, 0);
+                break;
+              case "filteredImage2":
+                context2.putImageData( data.result, 0, 0);
+                break;
+            }
+            break;
+          default:
+            appendMsgTo( output, "div",
+              `${data.op}(${JSON.stringify( data.args)}) ➝ <code>${JSON.stringify( data.result)}</code>`);
+        }
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
@@ -40,11 +64,37 @@
           `${err.message}<br>(at line ${err.lineno} in ${err.filename})`);
         err.preventDefault();
       };
+
+      img.onload = () => {
+          canvas1.width = img.width;
+          canvas1.height = img.height;
+          canvas2.width = img.width;
+          canvas2.height = img.height;
+
+          context1.drawImage( img, 0, 0);
+          const imageData1 = context1.getImageData( 0, 0, canvas1.width, canvas1.height);
+          worker.postMessage(
+            { op: "filter", args: { canvas: "filteredImage1", filter: "grayscale" }, imageDataByRef: imageData1 },
+            [ imageData1.data.buffer ]);
+
+          context2.drawImage( img, 0, 0);
+          const imageData2 = context2.getImageData( 0, 0, canvas2.width, canvas2.height);
+          worker.postMessage(
+            { op: "filter", args: { canvas: "filteredImage2", filter: "brighten" }, imageDataByRef: imageData2 },
+            [ imageData2.data.buffer ]);
+      };
     </script>
 
     <main>
       <h2>Experiment 03 · Transferable objects</h2>
+
+      <img id="sourceImage" src="assets/geneve-seujet-20150810(olange).jpg"
+        title="Genève, Quai du Seujet, 10.08.2015 &copy; olange" /><br>
       <output></output>
+
+      <canvas id="filteredImage1"></canvas>
+      <canvas id="filteredImage2"></canvas>
+
     </main>
 
     <nav>
