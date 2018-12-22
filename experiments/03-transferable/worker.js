@@ -22,6 +22,8 @@ self.onmessage = (msg) => {
       filters[ filter]( imageData);
       self.postMessage(
         { op: data.op, args: data.args, result: imageData },
+        // This extra-argument specifies the Transferable object
+        // that will be passed out of the worker with zero-copy
         [ imageData.data.buffer ]);
       break;
     }
