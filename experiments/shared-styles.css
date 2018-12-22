@@ -21,9 +21,12 @@ main {
 nav {
   position: absolute; top: 0; }
 
-nav a {
+nav a, nav span {
   display: inline-block;
   padding: .5em .5em 0 0; }
+
+nav a.source {
+  float: right }
 
 code.block {
   display: block;
