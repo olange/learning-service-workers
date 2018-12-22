@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Experiment 03 · Transferable objects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Experiment use of Transferable objects, such as an ImageBitmap" />
+
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400|Roboto+Mono:300");
+      @import url("../shared-styles.css");
+    </style>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <script type="module">
+      import { appendMsgTo } from "../shared-func.js";
+      const output = document.querySelector( "output");
+
+      const worker = new Worker( "worker.js");
+
+      worker.postMessage( { op: "sip", args: [ "☕️" ] });
+      worker.postMessage( { op: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { op: "listen", args: [ "America / A Horse with No Name" ] });
+
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
+      worker.onmessage = (msg) => {
+        console.log( "index.html › Received message", msg.data);
+        appendMsgTo( output, "div",
+          `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
+      };
+      worker.onerror = (err) => {
+        console.error( "index.html › Received error", err.message);
+        appendMsgTo( output, "div",
+          `${err.message}<br>(at line ${err.lineno} in ${err.filename})`);
+        err.preventDefault();
+      };
+    </script>
+
+    <main>
+      <h2>Experiment 03 · Transferable objects</h2>
+      <output></output>
+    </main>
+
+    <nav>
+      <a href="../">home</a>
+      <a href="https://github.com/olange/learning-service-workers/tree/master/experiments/03-transferable/" class="source">source</a>
+    </nav>
+  </body>
+</html>

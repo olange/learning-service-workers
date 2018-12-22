@@ -20,10 +20,25 @@
       <h2>Web Worker Experiments</h2>
       <ul>
         <li><a href="01-instantiation/">Experiment 01 · Worker instantiation</a><br>
-          Classic-, Module- or Embedded script</li>
+          Using either Classic-, Module- or Embedded scripts, experience whether or not
+          your browser supports these ways of instantiating workers; and how to report
+          errors from the worker, how to handle them in the browser.</li>
         <li><a href="02-generators/">Experiment 02 · Async Generators</a><br>
-          Single worker, or delegation to multiple subworkers</li>
-      </ul>
+          Single worker, or delegation to multiple subworkers. An experiment
+          to check whether or not workers of your browser can consume data
+          asynchronously from generator functions; that we can return the data
+          in arrays; and that we can spawn subworkers.</li>
+        <li><a href="03-transferable/">Experiment 03 · Transferrable Objects</a><br>
+          The Browser uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm"
+          ><em>structured clone algorithm</em></a> to pass data in/out of Workers; it
+          supports complex data types, such as <code>File</code>, <code>Blob</code>,
+          <code>ArrayBuffer</code>, but the copy can take hundreds of milliseconds for
+          large objects. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Transferable"
+          >Transferable</a> objects can be transfered from one context to the other; it
+          is a zero-copy. Check whether it works in your browser — while filtering an image
+          in a worker and returning an <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap"
+          ><code>ImageBitmap</code></a>, which is a <code>Transferable</code> object.</li>
+        </ul>
     </main>
 
     <nav>
