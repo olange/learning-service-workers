@@ -45,4 +45,4 @@ output {
 
 /* Prevent grid blowout */
 img { max-width: 100%; }
-output, pre { max-width: 100%; overflow: hidden; }
+output, pre { max-width: 100%; overflow: scroll }
