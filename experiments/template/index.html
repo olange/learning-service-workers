@@ -23,8 +23,8 @@
 
       const worker = new Worker( "worker.js");
 
-      worker.postMessage( { opcode: "sip", args: [ "☕️" ] });
-      worker.postMessage( { opcode: "crunch", args: [ "🍐", "🍪" ] });
+      worker.postMessage( { op: "sip", args: [ "☕️" ] });
+      worker.postMessage( { op: "crunch", args: [ "🍐", "🍪" ] });
 
       setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
 
