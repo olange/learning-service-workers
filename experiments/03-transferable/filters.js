@@ -1,5 +1,13 @@
 function none() {}
 
+function swap( imageData) {
+  const { data: d } = imageData;
+  for( let i = 0; i < d.length; i += 4) {
+    const [ r, g, b] = [ d[ i], d[ i + 1], d[ i + 2]];
+    [ d[ i], d[ i + 1], d[ i + 2]] = [ g, b, r ];
+  }
+};
+
 function grayscale( imageData) {
   const { data: d } = imageData;
   for( let i = 0; i < d.length; i += 4) {

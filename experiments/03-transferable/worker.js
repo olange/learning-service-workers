@@ -3,7 +3,8 @@ importScripts( "filters.js");
 const filters = {
   "none": none,
   "grayscale": grayscale,
-  "brighten": brighten
+  "brighten": brighten,
+  "swap": swap
 }
 
 self.onmessage = (msg) => {
@@ -18,6 +19,8 @@ self.onmessage = (msg) => {
     }
     case "filter": {
       const { canvas, filter } = data.args;
+      console.assert( typeof filters[ filter] == "function",
+        `worker.js › No filter available by the name ${filter}`);
       const imageData = data.imageDataByRef;
       filters[ filter]( imageData);
       self.postMessage(
