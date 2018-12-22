@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Experiment 02 · Async Generators · More generators</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Uses a single worker to asynchronously generate more lists of data" />
+
+    <link rel="icon" href="../../favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Lato:300|Roboto:400|Roboto+Mono:300");
+      @import url("../../shared-styles.css");
+    </style>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <script type="module">
+      import { appendMsgTo } from "../../shared-func.js";
+      const output = document.querySelector( "output");
+      const t0 = performance.now();
+
+      const worker = new Worker( "worker.js");
+      appendMsgTo( output, "div", `t0: <code>new Worker()</code>`);
+
+      worker.postMessage( { name: "helix+001", op: "helix", args: [ ] });
+      worker.postMessage( { name: "felix+001", op: "felix", args: [ ] });
+      worker.postMessage( { name: "zelig+001", op: "zelig", args: [ ] });
+
+      setTimeout(() => worker.terminate(), 5000); // Guard against infinite run
+
+      worker.onmessage = (msg) => {
+        const t1 = performance.now();
+        console.log( "index.html › Received message", msg.data);
+        appendMsgTo( output, "div",
+          `t${Math.floor( t1-t0)} [${msg.data.name}]: ${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
+      };
+
+      worker.onerror = (err) => {
+        console.error( "index.html › Received error", err.message);
+        appendMsgTo( output, "div", err.message);
+        err.preventDefault();
+      };
+    </script>
+
+    <main>
+      <h2>Experiment 02 · Async Generators · More generators</h2>
+      <p>Something. Anything. Everything gets better with a glass of red wine.</p>
+      <code class="block">
+        const worker = new Worker( "worker.js");<br>
+        worker.postMessage( { name: "helix+001", op: "helix", args: [ ] });
+        worker.postMessage( { name: "felix+001", op: "felix", args: [ ] });
+        worker.postMessage( { name: "zelig+001", op: "zelig", args: [ ] });
+      </code>
+      <output></output>
+
+      <p>Supported by <a href="https://www.apple.com/lae/safari/">Safari 12</a>
+        and <a href="https://www.mozilla.org/firefox/">Firefox 64</a> and
+        <a href="https://www.google.com/chrome/">Chrome 71</a> out-of-the box.</p>
+    </main>
+
+    <nav>
+      <a href="../../">up</a>
+      <a href="../single-worker/">single-worker</a>
+      <a href="../multiple-subworkers/">multiple-subworkers</a>
+      <span>more-generators</span>
+    </nav>
+  </body>
+</html>
