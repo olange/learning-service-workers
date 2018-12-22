@@ -3,7 +3,8 @@ function sleep( ms) {
 }
 
 async function* range( min, max, step = 1, delay = undefined) {
-  console.log( `worker.js › range(${min}, ${max}, ${step}, ${delay}) async generator function started iteration`);
+  console.log( `worker.js › range(${min}, ${max}, ${step}, ${delay}) async generator function started iterating`);
+
   console.assert( typeof delay === "undefined" || typeof delay === "number",
     `worker.js › range() › delay should be either undefined or a number (${delay})`);
   console.assert( typeof min === "number" && typeof max === "number" && typeof step === "number",
@@ -23,10 +24,37 @@ async function* range( min, max, step = 1, delay = undefined) {
   }
 }
 
-async function* helix( delay = undefined) {
-  for(let i = 0; i <= 500; i += 1) {
-    yield [ i, i, i];
+async function* helix( radius = 1, height = 1, steps = 24, start = 0, end = 2 * Math.PI, delay = undefined) {
+  console.log( `worker.js › helix(${radius}, ${height}, ${steps}, ${start}, ${end}, ${delay}) async generator function started iterating`);
+
+  console.assert( typeof delay === "undefined" || typeof delay === "number",
+    `worker.js › helix() › delay should be either undefined or a number (${delay})`);
+  console.assert( typeof radius === "number" && typeof height === "number",
+    `worker.js › helix() › radius and height should numbers (${radius}, ${height})`);
+  console.assert( typeof steps === "number" && typeof start === "number" && typeof end === "number",
+    `worker.js › helix() › steps, start and end should numbers (${steps}, ${start} and ${end})`);
+
+  const incrAngle = (end - start) / steps;
+  const incrHeight = height / steps;
+  let a = start;
+  let h = 0;
+  for(let i = 0; i <= steps; i++) {
+    yield [ Math.cos( a) * radius, Math.sin( a) * radius, h ];
     if( delay) await sleep( delay);
+    h += incrHeight;
+    a += incrAngle
+  }
+}
+
+async function* felix( min, max, step = 1, delay = undefined) {
+  for await( let val of range( ...arguments)) {
+    yield [ val, val, val ];
+  }
+}
+
+async function* zelig( min, max, step = 1, delay = undefined) {
+  for await( let val of range( min, max, step * 2, delay)) {
+    yield [ val, val + step ];
   }
 }
 
@@ -47,10 +75,17 @@ self.onmessage = async (msg) => {
       self.postMessage( { ...data, result: values });
       break;
     }
-    case "felix":
+    case "felix": {
+      let values = [];
+      for await (let val of felix( ...data.args)) {
+        values.push( val);
+      }
+      self.postMessage( { ...data, result: values });
+      break;
+    }
     case "zelig": {
       let values = [];
-      for await (let val of range( ...data.args)) {
+      for await (let val of zelig( ...data.args)) {
         values.push( val);
       }
       self.postMessage( { ...data, result: values });

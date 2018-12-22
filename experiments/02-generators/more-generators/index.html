@@ -25,9 +25,9 @@
       const worker = new Worker( "worker.js");
       appendMsgTo( output, "div", `t0: <code>new Worker()</code>`);
 
-      worker.postMessage( { name: "helix+001", op: "helix", args: [ ] });
-      worker.postMessage( { name: "felix+001", op: "felix", args: [ 11, 20, 1, 250 ] });
-      worker.postMessage( { name: "zelig+001", op: "zelig", args: [ 21, 30, 1, 400 ] });
+      worker.postMessage( { name: "helix", op: "helix", args: [ 5, 10, 20, 0, 6 * Math.PI, 10 ] });
+      worker.postMessage( { name: "felix", op: "felix", args: [ 11, 20, 1, 250 ] });
+      worker.postMessage( { name: "zelig", op: "zelig", args: [ 1, 100, 5, 400 ] });
 
       setTimeout(() => {
           console.warn( "index.html › timeout( 5000) › Force-terminating worker ")
@@ -51,12 +51,15 @@
 
     <main>
       <h2>Experiment 02 · Async Generators · More generators</h2>
-      <p>Something. Anything. Everything gets better with a glass of red wine.</p>
+      <p>Sequences of 2-tuples (2D coordinate) and 3-tuples (3D coordinate), to play with.
+        Here again, every value is delivered delayed by the generator functions and results
+        are aggregated by the worker, and sent back as an array.</p>
+
       <code class="block">
         const worker = new Worker( "worker.js");<br>
-        worker.postMessage( { name: "helix+001", op: "helix", args: [ ] });
-        worker.postMessage( { name: "felix+001", op: "felix", args: [ ] });
-        worker.postMessage( { name: "zelig+001", op: "zelig", args: [ ] });
+        worker.postMessage( { name: "helix", op: "helix", args: [ 5, 10, 20, 0, 6 * Math.PI, 10 ] });<br>
+        worker.postMessage( { name: "felix", op: "felix", args: [ 11, 20, 1, 250 ] });<br>
+        worker.postMessage( { name: "zelig", op: "zelig", args: [ 1, 100, 5, 400 ] });
       </code>
       <output></output>
 
