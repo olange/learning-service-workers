@@ -35,7 +35,8 @@
       };
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
-        appendMsgTo( output, "div", err.message);
+        appendMsgTo( output, "div",
+          `${err.message}<br>(at line ${err.lineno} in ${err.filename})`);
         err.preventDefault();
       };
     </script>

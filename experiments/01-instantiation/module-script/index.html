@@ -32,11 +32,14 @@
 
       worker.onmessage = (msg) => {
         console.log( "index.html › Received message", msg.data);
-        appendMsgTo( output, "div", `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${msg.data.result}</code>`);
+        appendMsgTo( output, "div",
+          `${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
       };
+
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
-        appendMsgTo( output, "div", err.message);
+        appendMsgTo( output, "div",
+          `${err.message}<br>(at line ${err.lineno} in ${err.filename})`);
         err.preventDefault();
       };
     </script>

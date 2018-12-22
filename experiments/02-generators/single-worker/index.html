@@ -39,9 +39,11 @@
         appendMsgTo( output, "div",
           `t${Math.floor( t1-t0)} [${msg.data.name}]: ${msg.data.op}(${JSON.stringify( msg.data.args)}) ➝ <code>${JSON.stringify( msg.data.result)}</code>`);
       };
+
       worker.onerror = (err) => {
         console.error( "index.html › Received error", err.message);
-        appendMsgTo( output, "div", err.message);
+        appendMsgTo( output, "div",
+          `${err.message}<br>(at line ${err.lineno} in ${err.filename})`);
         err.preventDefault();
       };
     </script>
