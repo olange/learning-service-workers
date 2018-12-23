@@ -17,10 +17,15 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 | Background I/O or polling of webservices | Updating many rows of a local web database |
 | Processing large arrays or humungous JSON responses | Image filtering in <canvas> |
 
+## Learning
+
+* [The Basics of Web Workers](learning/basics-of-web-workers.md) Reading notes of various articles, synthesis of a 4-days [code retreat](https://github.com/olange/code-retreat/blob/master/2018/201812-cmj.md) in december 2018.
+
 ## Experiments
 
-* [01. Web Worker instantiation](experiments/01-instantiation/) Classic-, Module- or Embedded script
-* [02. Async Generators](experiments/02-generators/) Single worker, delegation to multiple subworkers, async generator functions to play with
+* [01. Web Worker instantiation](experiments/01-instantiation/) Classic-, Module- or Embedded script.
+* [02. Async Generators](experiments/02-generators/) Single worker, delegation to multiple subworkers, async generator functions to play with.
+* [03. Transferable objects](experiments/03-transferable/) Apply image filtering to a source image, delegating the heavy-lifting, passing the large amount of image data in/out the worker as a <code>Transferable</code> object.
 
 ## Articles: fundamentals
 
