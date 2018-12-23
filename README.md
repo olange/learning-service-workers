@@ -31,7 +31,7 @@ Learning using Service Workers, Web Workers and App Cache – articles, useful r
 
 ### Web Workers
 
-See [#2](../../issues/2) for reading notes.
+See document [The Basics of Web Workers](learning/basics-of-web-workers.md) [#2](../../issues/2) above for reading notes.
 
 * [H5R › The Basics of Web Workers](https://www.html5rocks.com/en/tutorials/workers/basics/) Eric Bidelman, 26.07.2010 _describes_ [Dedicated Workers](https://html.spec.whatwg.org/multipage/workers.html#dedicated-workers-and-the-worker-interface) _from the_ [Web Workers specification](https://html.spec.whatwg.org/multipage/workers.html)_, that are refered to as_ Web Workers
 * [WWG › HTML Living Standard › Web Workers](https://html.spec.whatwg.org/multipage/workers.html) _Specification which defines the API for running scripts in the background, independently of any user interface scripts._
@@ -66,6 +66,7 @@ See [#2](../../issues/2) for reading notes.
 ### Transferable Objects
 
 * [MDN › Web APIs › Transferable Objects](https://developer.mozilla.org/en-US/docs/Web/API/Transferable) _A marker interface, that represents an object that can be transfered between different execution contexts, like the main thread and Web workers. The [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer), [MessagePort](https://developer.mozilla.org/en-US/docs/Web/API/MessagePort) and [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap) types implement this marker interface._
+* See also above the articles [GWF › Updates › Workers ♥ ArrayBuffer](https://developers.google.com/web/updates/2011/09/Workers-ArrayBuffer) (Eric Bidelman, 08.2011) and [GWF › Updates › Transferable Objects: Lightning Fast!](https://developers.google.com/web/updates/2011/12/Transferable-Objects-Lightning-Fast) (Eric Bidelman, 12.2011).
 
 ### Fetching data
 
