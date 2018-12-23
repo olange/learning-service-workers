@@ -40,7 +40,7 @@ See [#2](../../issues/2) for reading notes.
 * [GWF › Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers/) Web Fundamentals, Matt Gaunt, 21.09.2018
 * [W3C › Service Workers explained](https://github.com/w3c/ServiceWorker/blob/master/explainer.md) [Alex Russel](https://github.com/slightlyoff), initial publ. 22.04.2013 / ongoing updates until 11.2017
 * [W3C › Service Workers Specification](https://github.com/w3c/ServiceWorker) by Alex Russel, Jake Archibald, Jungkee Song and many others
-* [Jake Archibald › The Year of the Streams](https://jakearchibald.com/2016/streams-ftw/)
+* [The Year of the Streams](https://jakearchibald.com/2016/streams-ftw/) Jake Archibald, 25.01.2016
 
 ### Application Cache
 
