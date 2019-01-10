@@ -1,3 +1,5 @@
+importScripts( "./perlin.js");
+
 function sleep( ms) {
   return new Promise( resolve => setTimeout( resolve, ms));
 }
@@ -38,7 +40,7 @@ async function* helix( radius = 1, height = 1, steps = 24, start = 0, end = 2 * 
   const incrHeight = height / steps;
   let a = start;
   let h = 0;
-  for(let i = 0; i <= steps; i++) {
+  for( let i = 0; i <= steps; i++) {
     yield [ Math.cos( a) * radius, Math.sin( a) * radius, h ];
     if( delay) await sleep( delay);
     h += incrHeight;
@@ -55,6 +57,16 @@ async function* felix( min, max, step = 1, delay = undefined) {
 async function* zelig( min, max, step = 1, delay = undefined) {
   for await( let val of range( min, max, step * 2, delay)) {
     yield [ val, val + step ];
+  }
+}
+
+async function* noiseMatrix( min, max, step = 1, delay = undefined) {
+  for await( let y of range( min, max, step, delay)) {
+    let row = [];
+    for await( let x of range( min, max, step, 0)) {
+      row.push( Perlin.noise( x, y, 0));
+    }
+    yield row;
   }
 }
 
@@ -86,6 +98,14 @@ self.onmessage = async (msg) => {
     case "zelig": {
       let values = [];
       for await (let val of zelig( ...data.args)) {
+        values.push( val);
+      }
+      self.postMessage( { ...data, result: values });
+      break;
+    }
+    case "noise": {
+      let values = [];
+      for await (let val of noiseMatrix( ...data.args)) {
         values.push( val);
       }
       self.postMessage( { ...data, result: values });

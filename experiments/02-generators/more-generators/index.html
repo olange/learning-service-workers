@@ -28,11 +28,12 @@
       worker.postMessage( { name: "helix", op: "helix", args: [ 5, 10, 20, 0, 6 * Math.PI, 10 ] });
       worker.postMessage( { name: "felix", op: "felix", args: [ 11, 20, 1, 250 ] });
       worker.postMessage( { name: "zelig", op: "zelig", args: [ 1, 100, 5, 400 ] });
+      worker.postMessage( { name: "noise", op: "noise", args: [ 0, 1, 0.2, 100 ] });
 
       setTimeout(() => {
-          console.warn( "index.html › timeout( 5000) › Force-terminating worker ")
+          console.warn( "index.html › timeout( 6000) › Force-terminating worker ")
           worker.terminate();
-        }, 5000); // Guard against infinite run
+        }, 6000); // Guard against infinite run
 
       worker.onmessage = (msg) => {
         const t1 = performance.now();
@@ -53,13 +54,15 @@
       <h2>Experiment 02 · Async Generators · More generators</h2>
       <p>Sequences of 2-tuples (2D coordinate) and 3-tuples (3D coordinate), to play with.
         Here again, every value is delivered delayed by the generator functions and results
-        are aggregated by the worker, and sent back as an array.</p>
+        are aggregated by the worker, and sent back as an array. The noise matrix represents
+        values of a two-dimensional of Perlin noise map.</p>
 
       <code class="block">
         const worker = new Worker( "worker.js");<br>
         worker.postMessage( { name: "helix", op: "helix", args: [ 5, 10, 20, 0, 6 * Math.PI, 10 ] });<br>
         worker.postMessage( { name: "felix", op: "felix", args: [ 11, 20, 1, 250 ] });<br>
-        worker.postMessage( { name: "zelig", op: "zelig", args: [ 1, 100, 5, 400 ] });
+        worker.postMessage( { name: "zelig", op: "zelig", args: [ 1, 100, 5, 400 ] });<br>
+        worker.postMessage( { name: "noise", op: "noise", args: [ 0, 1, 0.2, 100 ] });
       </code>
       <output></output>
 
