@@ -15,7 +15,7 @@
     "postinstall": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem -subj \"/O=Le Petit Atelier de Genie logiciel/CN=localhost\""
   },
   "devDependencies": {
-    "http-server": "0.11.1"
+    "http-server": "^14.1.1"
   },
   "homepage": "https://github.com/olange/learning-service-workers#readme",
   "repository": {
