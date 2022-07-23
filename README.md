@@ -59,7 +59,8 @@ See document [The Basics of Web Workers](learning/basics-of-web-workers.md) [#2]
 
 ### Service workers
 
-* [Mastery Games › Service Workies](https://mastery.games/serviceworkies/) A collaborative project by geddski & Google Developers « _Learn Service Workers inside and out with the new PWA Mastery Game_ » (Displayed at $229 — currently free, as of 12.2018)
+* [Mastery Games › Service Workies](https://mastery.games/serviceworkies/) A collaborative project by Dave Geddes & Google Developers « _Learn Service Workers inside and out with the new PWA Mastery Game_ » (Displayed at $229 — currently free, as of 12.2018)
+* [web.dev › Service worker mindset](https://web.dev/service-worker-mindset/) Dave Geddes, 04.06.2019 « _A handful of depictive metaphors [referred to in the ‹Service Workies› game]; the post « explores these mental models and wrap our brains around the paradoxical traits that make service workers both tricky and awesome._ »
 
 ## Supporting and related technologies
 
