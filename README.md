@@ -59,7 +59,7 @@ See document [The Basics of Web Workers](learning/basics-of-web-workers.md) [#2]
 
 ### Service workers
 
-* [Mastery Games › Service Workies](https://serviceworkies.mastery.games/) A collaborative project by geddski & Google Developers « _Learn Service Workers inside and out with the new PWA Mastery Game_ » (Displayed at $229 — currently free, as of 12.2018)
+* [Mastery Games › Service Workies](https://mastery.games/serviceworkies/) A collaborative project by geddski & Google Developers « _Learn Service Workers inside and out with the new PWA Mastery Game_ » (Displayed at $229 — currently free, as of 12.2018)
 
 ## Supporting and related technologies
 
