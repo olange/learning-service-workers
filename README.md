@@ -1,8 +1,6 @@
 # Learning Fetch, Web- and Service Workers
 
-Learning using Service Workers, Web Workers and App Cache – articles, useful resources, courseware, personal notes
-
-[![Join the chat at https://gitter.im/learning-service-workers/Lobby](https://badges.gitter.im/learning-service-workers/Lobby.svg)](https://gitter.im/learning-service-workers/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Learning using Service Workers, Web Workers and Cache – articles, useful resources, courseware, personal notes.
 
 « _A_ [**Web Worker**](https://www.html5rocks.com/en/tutorials/workers/basics/) _runs the code of a Javascript file in an_ isolated **worker thread**. _There are different kind of Workers; in a webapp, the most common are:_
 
